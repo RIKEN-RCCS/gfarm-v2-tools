@@ -1,5 +1,7 @@
 # Logging
 
+Logging command outputs to syslog, trivially.
+
 ## Problem: Random interleaving of outputs
 
 Outputs on the stdout/stderr are randomly interleaved using tee(1).
