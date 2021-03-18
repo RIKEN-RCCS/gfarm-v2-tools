@@ -6,9 +6,7 @@
 ## messages to a logging file and the logger.  The environment variable
 ## "GFLIB" is used to specify the place of "libgfarm.so".
 
-log=/tmp/log-move-files
-logger=cat
-##logger=logger
+log="ftp.debug"
 
 ##
 ## Check the arguments and the environment setting.
@@ -47,12 +45,8 @@ docopy() {
     retirefile.py ${lib} --verbose --summary ${src} ${dst}/${dir}
 }
 
-logging() {
-    tee -a ${log} | grep -v '^\[OK\]' | ${logger}
-}
-
 ##
 ## Do moving.
 ##
 
-docopy ${src} ${dst} 2>&1 | logging
+docopy ${src} ${dst} 2>&1 | tee >(logger -p ${log})
