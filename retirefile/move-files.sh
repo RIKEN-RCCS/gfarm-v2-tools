@@ -38,8 +38,6 @@ fi
 trap "gfrmdir ${mutex}; trap - EXIT; exit" INT TERM EXIT
 
 docopy() {
-    src=$1
-    dst=$2
     date +"%Y-%m-%dT%H:%M:%S%z"
     gfpcopy -P ${src} gfarm://${dst}
     retirefile.py ${lib} --verbose --summary ${src} ${dst}/${dir}
@@ -49,4 +47,4 @@ docopy() {
 ## Do moving.
 ##
 
-docopy ${src} ${dst} 2>&1 | tee >(logger -p ${log})
+docopy 2>&1 | tee >(logger -p ${log})
