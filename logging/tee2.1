@@ -1,0 +1,38 @@
+.\" (* Run nroff -u0 -Tlp -man *)
+.TH tee2 1 "2021-03-03" "--" "User Commands"
+.SH NAME
+tee2 \- A variant of tee(1) for pipeing both of the stdout and the
+stderr
+.SH SYNOPSIS
+.LP
+.nf
+\fBtee2\fR command [arg]...
+.fi
+.SH DESCRIPTION
+.sp
+.LP
+\fBtee2\fR executes a command and duplicates the stdout to fd=3 and
+the stderr to fd=4.  Passing fd=4 is optional, then it redirects the
+both to fd=3.  It is used in bash scripts as a line like:
+.sp
+.nf
+$ tee2 ls -l 3> >(logger)
+.fi
+.sp
+This example forwards all outputs to syslog as well as to
+the stdout/stderr.
+.LP
+\fBtee2\fR itself ignores the signals INT and QUIT.  It exits normally
+with value=0 even if the subprocess is killed.
+.SH OPTIONS
+.sp
+.LP
+No options are supported:
+.SH SEE ALSO
+.sp
+.LP
+See the comments in the source code for details:
+.nf
+.sp
+https://github.com/RIKEN-RCCS/gfarm-v2-tools
+.fi
