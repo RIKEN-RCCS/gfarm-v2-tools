@@ -18,7 +18,7 @@ destinations.
 Usually, gfpcopy is sufficient for manually transferring files.
 Errors are simply noticed by the user.  And also, the user can wait
 for replicas to stabilize.  On the other hand, a move-operation is
-preferred when transferring files in background like a cron job.  It
+preferred when transferring files in a background like a cron job.  It
 simplifies detecting errors (a file remains in the source) and
 recovering errors (a work is retried on remaining files).
 
@@ -40,7 +40,7 @@ It does not provide installation procedures.  Copy the files manually.
 ### Usage
 
 * It needs to use the library "libgfarm.so" (Gfarm version
-  2.7.16).  It should be visible in some ld paths (LD_LIBRARY_PATH) or
+  2.7.17).  It should be visible in some ld paths (LD_LIBRARY_PATH) or
   passed by an option `--so path`.  See the help message of
   retirefile.py.
 * It accepts a pair of source and destination directories.  The source
