@@ -5,14 +5,14 @@ Packs and transfers small many files.
 ## File-Courier Design
 
 * Objectives
-** Archive files up to 25 GB in a single file (uncompressed size)
-** Transfer via rsync (or gfpcopy) to enable checksum check
-** (Restartable on failure in archiving and transfering)
+  * Archive files up to 25 GB in a single file (uncompressed size)
+  * Transfer via rsync or gfpcopy to enable checksum checks
+  * (Make restartable on failures in archiving and transferring)
 
 * Implementation
-** Create an index-file (grouped by 25 GB by the sum of file sizes)
-** Archive+transfer by looking up the index-file
-** Make an archive once locally (to use rsync)
+  * Create an index-file (grouped by 25 GB by the sum of file sizes)
+  * Archive+transfer by looking up the index-file
+  * Make an archive once locally (to use rsync)
 
 ## Shell Scripts
 
@@ -23,9 +23,13 @@ so as to limit the sum of the sizes in a group.  It first outputs
 lines of "size file-name" and then calls "group-files.awk" to split
 the lines to groups by the sum of the sizes.
 
+__group-files.awk__ is a subprogram in "make-index.sh".
+
 __pack-copy-files.sh__ archives and transfers a group of files.  It
 calls "zip_-@" on the output from "catalog-files.sh".
 "catalog-files.sh" lists files in a certain group in the index-file.
+
+__catalog-files.sh__ is a subprogram in "pack-copy-files.sh".
 
 ## Notes
 

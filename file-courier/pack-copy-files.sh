@@ -21,7 +21,6 @@ if [ "$#" -ne 6 ]; then
 fi
 
 set -e
-
 sourcedirectory="$1"
 targetdirectory="$2"
 temporaryprefix="$3"
@@ -29,7 +28,7 @@ indexfile="$4"
 for i in `seq -f '%04g' $5 $6`
 do
     echo "zip and copy a group $i ..."
-    sh "$(dirname $0)/catalog-files.sh" "${indexfile}" $i \
+    sh "$(dirname $0)/catalog-files.sh" "${indexfile}" "$i" \
 	| (cd "${sourcedirectory}"; zip -q -@ "${temporaryprefix}-$i")
     rsync -ptgo -P -e ssh "${temporaryprefix}-$i.zip" "${targetdirectory}/"
     rm "${temporaryprefix}-$i.zip"

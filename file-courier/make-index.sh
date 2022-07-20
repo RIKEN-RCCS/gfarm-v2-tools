@@ -14,5 +14,6 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
+set -e
 find "$1" -xdev -type f -printf "%s %P\n" \
      | awk -M -f $(dirname $0)/group-files.awk
