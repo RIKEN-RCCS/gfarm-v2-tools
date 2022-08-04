@@ -10,7 +10,7 @@ Packs and transfers small many files.
   * (Make restartable on failures in archiving and transferring)
 
 * Implementation
-  * Create an index-file (grouped by 25 GB by the sum of file sizes)
+  * Create an index-file (grouped by 25 GB by the sum of the file sizes)
   * Archive+transfer by looking up the index-file
   * Make an archive once locally (to use rsync)
 
@@ -21,15 +21,17 @@ directory.  An index-file consists of lines "size file-name" separated
 by a four digits entry "nnnn".  Lines are grouped by a "nnnn" entry,
 so as to limit the sum of the sizes in a group.  It first outputs
 lines of "size file-name" and then calls "group-files.awk" to split
-the lines to groups by the sum of the sizes.
+the lines to groups by the sum of the sizes.  An index-file starts
+with a line "0000" and ends with "nnnn" as nnnn is the number of
+groups.
 
-__group-files.awk__ is a subprogram in "make-index.sh".
+__group-files.awk__ is a subprogram used in "make-index.sh".
 
 __pack-copy-files.sh__ archives and transfers a group of files.  It
 calls "zip_-@" on the output from "catalog-files.sh".
 "catalog-files.sh" lists files in a certain group in the index-file.
 
-__catalog-files.sh__ is a subprogram in "pack-copy-files.sh".
+__catalog-files.sh__ is a subprogram used in "pack-copy-files.sh".
 
 ## Notes
 
